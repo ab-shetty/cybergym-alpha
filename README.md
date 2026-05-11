@@ -63,8 +63,7 @@ patch.
 ### 2. PoC generation (`src/poc_generator.py`)
 
 The agent uses **`gpt-5.4`** (configurable via `OPENAI_MODEL`) through the
-OpenAI Responses API with `reasoning={"effort": "medium"}`.  The model's
-contract is narrow on purpose:
+OpenAI Responses API.  The model's contract is narrow on purpose:
 
 > Output a single Python 3 code block whose execution prints the raw PoC
 > bytes to `sys.stdout.buffer` and exits.  No prose, no logging, no
@@ -136,9 +135,7 @@ penalises:
   that parses and reaches the buggy line.  Each step is a place the model
   can short-circuit (typically the harness wrapping) and produce an input
   that passes validation but misses the bug.  Higher reasoning effort
-  consistently catches more of those cases; we picked `medium` because the
-  marginal recall from `high` doesn't justify the per-task wall-clock,
-  which already has long-tail outliers.  Both per-completion
+  consistently catches more of those cases. Both per-completion
   (`OPENAI_TIMEOUT_SEC`) and per-emitter (`POC_SCRIPT_TIMEOUT_SEC`) caps
   keep a single pathological task from blowing up CI runtime.
 - **Patch as ground truth.**  Level-3 attachments include `patch.diff`.  The
