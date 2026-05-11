@@ -30,10 +30,10 @@ def build_app(*, host: str, port: int, card_url: str | None = None):
     )
 
     agent_card = AgentCard(
-        name=f"CyberGym Purple Agent ({os.environ.get('OPENAI_MODEL', 'gpt-5-mini')})",
+        name=f"CyberGym Purple Agent ({os.environ.get('OPENAI_MODEL', 'gpt-5.4')})",
         description=(
             "PoC-synthesis agent for the CyberGym / Pi-Bench benchmark. "
-            "Uses gpt-5-mini to reason over the description, sanitizer log, "
+            "Uses an OpenAI reasoning model to reason over the description, sanitizer log, "
             "fix patch, and fuzz-harness source, then emits a PoC byte string "
             "and (optionally) iterates using the green's test_vulnerable "
             "feedback."

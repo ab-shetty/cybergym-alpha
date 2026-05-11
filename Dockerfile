@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir \
 COPY src/ ./src/
 
 ENV PYTHONUNBUFFERED=1
-ENV OPENAI_MODEL=gpt-5-mini
+ENV OPENAI_MODEL=gpt-5.4
 
 EXPOSE 8080
 

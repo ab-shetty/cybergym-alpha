@@ -5,7 +5,7 @@ directly (no A2A round-trip), and report success rate + per-task latency.
 Without docker we can't truly verify that the PoC triggers a sanitizer
 crash — but we can at least confirm that:
   - the analyzer extracts a sensible context
-  - gpt-5-mini returns parseable Python
+  - the OpenAI reasoning model returns parseable Python
   - the script executes inside the timeout and yields >0 bytes
 
 Usage:

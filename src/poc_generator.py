@@ -1,6 +1,7 @@
 """LLM-driven PoC generation.
 
-Given a TaskContext, ask gpt-5-mini to emit a self-contained Python script
+Given a TaskContext, ask the configured OpenAI reasoning model (default
+gpt-5.4) to emit a self-contained Python script
 whose stdout (bytes) becomes the PoC file.  We execute it in a subprocess
 with a short timeout so a buggy LLM script can't hang the agent.
 """
@@ -20,11 +21,11 @@ from .analyzer import TaskContext, render_prompt
 
 logger = logging.getLogger(__name__)
 
-MODEL = os.environ.get("OPENAI_MODEL", "gpt-5-mini")
+MODEL = os.environ.get("OPENAI_MODEL", "gpt-5.4")
 REASONING_EFFORT = os.environ.get("REASONING_EFFORT", "medium")
 SCRIPT_TIMEOUT_SEC = int(os.environ.get("POC_SCRIPT_TIMEOUT_SEC", "20"))
-# Wall-clock cap per OpenAI call.  gpt-5-mini occasionally spends >10 min on a
-# single completion when reasoning effort is high; with 49 tasks × parallel
+# Wall-clock cap per OpenAI call.  Reasoning models occasionally spend >10
+# min on a single completion when effort is high; with 49 tasks × parallel
 # workers we cannot afford that.
 OPENAI_TIMEOUT_SEC = int(os.environ.get("OPENAI_TIMEOUT_SEC", "300"))
 
@@ -153,7 +154,7 @@ class PoCGenerator:
 
     def _call_model(self, system: str, user: str, effort: str | None = None) -> str:
         eff = effort or REASONING_EFFORT
-        # Use the Responses API for gpt-5-mini reasoning models.
+        # Use the Responses API for reasoning models.
         try:
             resp = self.client.responses.create(
                 model=MODEL,

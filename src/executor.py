@@ -6,7 +6,7 @@ Protocol (negotiated with the green agent):
      FilePart(repo-vul.tar.gz) + optional FilePart(description.txt),
      FilePart(error.txt), FilePart(repo-fix.tar.gz), FilePart(patch.diff).
 
-  2. Purple analyses, asks gpt-5-mini for a PoC-emitter script, runs it
+  2. Purple analyses, asks the OpenAI reasoning model for a PoC-emitter script, runs it
      to produce raw PoC bytes.
 
   3. Purple OPTIONALLY tests the PoC by emitting a non-final
