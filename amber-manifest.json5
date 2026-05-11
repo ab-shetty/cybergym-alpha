@@ -2,7 +2,7 @@
 {
   manifest_version: "0.2.0",
   program: {
-    image: "ghcr.io/ab-shetty/cybergym-purple:latest",
+    image: "ghcr.io/ab-shetty/cybergym-alpha:latest",
     entrypoint: [
       "python", "-m", "src.server",
       "--host", "0.0.0.0",
