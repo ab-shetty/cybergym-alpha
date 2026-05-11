@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# Build artefacts
+build/
+dist/
+*.whl
+
+# uv / pip
+.uv/
+pip-log.txt
+pip-wheel-metadata/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+# Local secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Eval outputs
+/tmp/eval_*.json
+eval_*.json
+*.poc
+
+# HF cache (sometimes ends up here when CACHE_DIR is repo-relative)
+.cache/

@@ -1,0 +1,13 @@
+[project]
+name = "cybergym-purple"
+version = "0.1.0"
+description = "Purple agent for the CyberGym / Pi-Bench benchmark"
+requires-python = ">=3.12"
+dependencies = [
+    "a2a-sdk[http-server]>=0.3.20,<1.0",
+    "openai>=1.50.0",
+    "httpx>=0.28.1",
+    "pydantic>=2.10.0",
+    "uvicorn>=0.30.0",
+    "huggingface-hub>=0.24.0",
+]

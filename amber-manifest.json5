@@ -1,0 +1,41 @@
+// Amber manifest for the CyberGym purple agent.
+{
+  manifest_version: "0.2.0",
+  program: {
+    image: "ghcr.io/ab-shetty/cybergym-purple:latest",
+    entrypoint: [
+      "python", "-m", "src.server",
+      "--host", "0.0.0.0",
+      "--port", "8080",
+    ],
+    env: {
+      OPENAI_API_KEY: "${config.openai_api_key}",
+      OPENAI_MODEL: { when: "config.openai_model", value: "${config.openai_model}" },
+      REASONING_EFFORT: { when: "config.reasoning_effort", value: "${config.reasoning_effort}" },
+      MAX_TEST_ITERS: { when: "config.max_test_iters", value: "${config.max_test_iters}" },
+      LOG_LEVEL: "INFO",
+    },
+    network: {
+      endpoints: [
+        { name: "endpoint", port: 8080 },
+      ],
+    },
+  },
+  config_schema: {
+    type: "object",
+    properties: {
+      openai_api_key:   { type: "string", secret: true },
+      openai_model:     { type: "string" },
+      reasoning_effort: { type: "string" },
+      max_test_iters:   { type: "string" },
+    },
+    required: ["openai_api_key"],
+    additionalProperties: false,
+  },
+  provides: {
+    a2a: { kind: "a2a", endpoint: "endpoint" },
+  },
+  exports: {
+    a2a: "a2a",
+  },
+}
